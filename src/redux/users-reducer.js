@@ -1,51 +1,82 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-function randomLikesCount(min = 1, max = 100) {
-    // получить случайное число от (min-0.5) до (max+0.5)
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
-    return Math.round(rand);
-}
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
-    postsData: [
-        {id: 1, message: 'Hi, how are you', likes: 7},
-        {id: 2, message: 'It\'s my second post.', likes: 51},
-        {id: 3, message: 'This is really cool!', likes: 13}
-    ],
-    newPostText: '',
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 19145,
+    currentPage: 1,
 }
 
-const profileReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            let newPost = {
-                id: 4,
-                message: state.newPostText,
-                likes: randomLikesCount(),
+        case FOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.userID) {
+                        return {...u, followed: true}
+                    }
+                    return u;
+                })
             }
-            return {...state,
-            postsData: [...state.postsData, newPost],
-            newPostText: ''}
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state,
-            newPostText: action.newText}
-        }
+        case UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.userID) {
+                        return {...u, followed: false}
+                    }
+                    return u;
+                })
+            }
+        case SET_USERS:
+            return {...state, users: action.users}
+        case SET_CURRENT_PAGE:
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state, totalUsersCount: action.count
+            }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = () => {
+export const followAC = (userID) => {
     return {
-        type: ADD_POST
+        type: FOLLOW,
+        userID
     }
 }
-export const updateNewPostTextActionCreator = (text) => {
+export const unfollowAC = (userID) => {
     return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text,
+        type: UNFOLLOW,
+        userID
+    }
+}
+export const setUsersAC = (users) => {
+    return {
+        type: SET_USERS,
+        users
+    }
+}
+export const setCurrentPageAC = (currentPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage,
+    }
+}
+export const setTotalUsersCountAC = (totalUsersCount) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        count: totalUsersCount,
     }
 }
 
-export default profileReducer;
+export default usersReducer;

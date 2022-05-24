@@ -1,9 +1,23 @@
 .header {
-    background: grey;
     grid-area: h;
+    margin: 5px;
+    border-radius: 10px;
+    background: #363d45;
 }
 
 .header img {
-    width: 200px;
+    width: 28px;
+    margin-left: 10px;
 }
 
+.header h1 {
+    color: white;
+    margin: 0 0 0 10px;
+    font-size: 30px;
+}
+
+.headerNav {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}

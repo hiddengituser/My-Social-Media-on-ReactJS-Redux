@@ -1,17 +1,35 @@
 .nav {
-    background: cornflowerblue;
+    background: #363d45;
     grid-area: n;
+    margin: 0 7px 7px 7px;
+    border-radius: 15px;
 }
 
-.nav li {
+.item {
     color: white;
     list-style: none;
     text-decoration: none;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
-.nav a {
-    color: white;
-    list-style: none;
+.item:last-child {
+    margin-top: 30px;
+}
+
+.active {
+    color: #05b488;
     text-decoration: none;
+    background: #161330;
+    border-radius:  0 7px 7px 0;
+    padding: 5px 80px 5px 5px;
+    transition: 0.1s;
 }
 
+.friends {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}

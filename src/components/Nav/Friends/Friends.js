@@ -1,31 +1,25 @@
 import React from "react";
-import classes from './Nav.module.css';
-import {NavLink} from "react-router-dom";
+import classes from './Friends.module.css';
+import FriendsItem from "./FriendsItem/FriendsItem";
+import {connect} from "react-redux";
 
-const setActiveClass = (s) => s.isActive ? classes.active : classes.item;
 
-const Nav = () => {
+const Friends = (props) => {
+
+    const friendsElement = props.dialogsData.map(d => <FriendsItem avatar={d.avatar} name={d.name} id={d.id}/>)
+
     return (
-        <nav className={classes.nav}>
-            <ul>
-                <li className={classes.item}>
-                    <NavLink to="/profile" className={setActiveClass}>Profile</NavLink>
-                </li>
-                <li className={classes.item}>
-                    <NavLink to="/dialogs" className={setActiveClass}>Messages</NavLink>
-                </li>
-                <li className={classes.item}>
-                    <NavLink to="/news" className={setActiveClass}>News</NavLink>
-                </li>
-                <li className={classes.item}>
-                    <NavLink to="/music" className={setActiveClass}>Music</NavLink>
-                </li>
-                <li className={classes.item}>
-                    <NavLink to="/settings" className={setActiveClass}>Settings</NavLink>
-                </li>
-            </ul>
-        </nav>
+        <div className={classes.friends}>
+            <p>Friends</p>
+            <div className={classes.friendsItemList}>
+                {friendsElement[0]}
+                {friendsElement[1]}
+                {friendsElement[2]}
+            </div>
+        </div>
     )
 }
 
-export default Nav;
+
+
+export default Friends;

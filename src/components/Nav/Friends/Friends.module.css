@@ -1,17 +1,17 @@
-.nav {
-    background: cornflowerblue;
-    grid-area: n;
+.friends {
+    width: 100%;
 }
 
-.item {
+.friends p {
     color: white;
-    list-style: none;
-    text-decoration: none;
-    margin-bottom: 8px;
 }
 
+.friendsItemList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
-.active {
-    color: black;
-    text-decoration: none;
+.friends p {
+    text-align: center;
 }

@@ -1,12 +1,5 @@
-.content {
-    background: yellowgreen;
-    grid-area: c;
-}
-
-.contentHeader img {
-    width: 100%;
-}
-
-.content .secondBlock {
-    display: flex;
+.profile {
+    background: #363d45;
+    border-radius: 15px;
+    margin-right: 7px;
 }

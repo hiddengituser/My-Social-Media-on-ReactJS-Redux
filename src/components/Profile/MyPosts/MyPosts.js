@@ -1,27 +1,40 @@
 import React from "react";
-import classes from "./Profile.module.css";
+import classes from "./MyPosts.module.css";
+import Post from "./Post/Post";
+import {addPostActionCreator} from "../../../redux/profile-reducer";
 
-const Profile = () => {
+
+const MyPosts = (props) => {
+
+    const postsElements = props.postsData.map(p => <Post message={p.message} likes={p.likes}/>)
+
+    const newPostElement = React.createRef();
+
+    const onAddPost = () => {
+        if (newPostElement.current.value !== '') {
+            props.addPost();
+        }
+    }
+    const onPostChange = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text)
+    }
+
     return (
         <div className={classes.content}>
-            <div className={classes.contentHeader}>
-                <img
-                    src="https://www.visitdubai.com/-/media/gathercontent/article/t/top-rides-at-img-worlds-of-adventure/media/top-rides-at-img-worlds-of-adventure-predator-5.jpg"
-                    alt="img"/>
-            </div>
-            <div className={classes.secondBlock}>
-                <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg" alt="cube-icon"/>
-                <p className="description">description</p>
-            </div>
-            <div className={classes.myPosts}>
-                <div className={classes.newPost}>New post</div>
+            <div className={classes.newPost}>
+                <h3>My Posts</h3>
+                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}
+                          placeholder="new post..."/>
+                <div>
+                    <button onClick={onAddPost}>Add post</button>
+                </div>
             </div>
             <div className={classes.allPosts}>
-                <div className={classes.post1}>post 1</div>
-                <div className={classes.post2}>post 2</div>
+                {postsElements}
             </div>
         </div>
     )
 }
 
-export default Profile;
+export default MyPosts;

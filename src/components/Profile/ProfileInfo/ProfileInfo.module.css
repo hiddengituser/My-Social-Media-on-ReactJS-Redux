@@ -1,6 +1,7 @@
 
 .contentHeader img {
     width: 100%;
+    border-radius: 15px;
 }
 
 .secondBlock {
@@ -9,4 +10,8 @@
 
 .content .secondBlock img {
     width: 200px;
+}
+
+.secondBlock {
+    margin: 10px;
 }

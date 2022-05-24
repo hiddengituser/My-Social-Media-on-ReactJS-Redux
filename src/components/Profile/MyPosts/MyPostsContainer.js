@@ -1,43 +1,27 @@
 import React from "react";
-import classes from "./MyPosts.module.css";
-import Post from "./Post/Post";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
 
 
-
-const MyPosts = (props) => {
-
-    const postsElements = props.postsData.map(p => <Post message={p.message} likes={p.likes}/>)
-
-    const newPostElement = React.createRef();
-
-    const addPost = () => {
-        if (newPostElement.current.value !== '') {
-            props.dispatch(addPostActionCreator())
-            //props.addPOst();
-        }
+let mapStateToProps = (state) => {
+    return {
+        postsData: state.profilePage.postsData,
+        newPostText: state.profilePage.newPostText,
     }
-    const onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.dispatch(updateNewPostTextActionCreator(text));
-        //props.updateNewPostText(text);
-    }
+}
+let mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        },
 
-    return (
-        <div className={classes.content}>
-            <div className={classes.newPost}>
-                <h3>My Posts</h3>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}
-                          placeholder="new post..."/>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
-            <div className={classes.allPosts}>
-                {postsElements}
-            </div>
-        </div>
-    )
+        updateNewPostText: (text) => {
+            dispatch(updateNewPostTextActionCreator(text))
+        },
+    }
 }
 
-export default MyPosts;
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+
+export default MyPostsContainer;

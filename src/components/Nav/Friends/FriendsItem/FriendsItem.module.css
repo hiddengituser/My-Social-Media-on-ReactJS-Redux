@@ -1,0 +1,23 @@
+.friendItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    transition: 0.1s;
+}
+
+.friendItem img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 2px deepskyblue;
+}
+
+.friendItem a {
+    text-decoration: none;
+    color: white;
+}
+
+.friendItem:nth-child(2) {
+    margin: 0 8px;
+}

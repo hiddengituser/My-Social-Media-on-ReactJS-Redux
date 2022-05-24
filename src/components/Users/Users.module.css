@@ -1,0 +1,72 @@
+.userPhoto {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.activeSpan {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.activeSpan span {
+    cursor: pointer;
+}
+
+.everyDiv {
+    color: white;
+    background: #363d45;
+    max-width: 100%;
+    width: 600px;
+    box-shadow: 0 0 10px 3px #161330;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 10px;
+    border-radius: 7px;
+}
+
+.everyDiv button {
+    border-style: none;
+    border-radius: 5px;
+    padding: 4px 15px;
+}
+
+.outerDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leftDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centerDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -25px;
+}
+
+
+.leftWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightDiv {
+    color: #05b488;
+    margin-right: 15px;
+}

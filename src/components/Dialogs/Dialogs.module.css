@@ -1,0 +1,95 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    grid-template-areas:
+    'dialogs messages';
+    margin: 0px 5px 7px 0px;
+    border-radius: 15px;
+    background: #363d45;
+}
+
+.dialogsItems {
+    grid-area: dialogs;
+    margin: 10px;
+}
+
+.dialog {
+    padding-top: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.dialog a {
+    text-decoration: none;
+    margin-left: 10px;
+    color: white;
+}
+
+.activeDialog {
+    padding-top: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #434b56;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.activeDialog a {
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    grid-area: messages;
+    margin: 10px;
+}
+
+.messages .message {
+    margin: 10px 0;
+}
+
+.mInner {
+    padding: 5px;
+    background: white;
+    border-radius: 7px 7px 0 7px;
+    float: right;
+    margin: 0 5px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.newMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+    margin: 30px 5px 10px;
+}
+
+.newMessage textarea {
+    width: 100%;
+    min-width: 180px;
+    max-width: 330px;
+    margin-bottom: 5px;
+}
+
+.newMessage button {
+    width: 120px;
+    height: 30px;
+    border-radius: 7px;
+    font-weight: 700;
+    background: #161330;
+    color: white;
+}
