@@ -1,0 +1,17 @@
+.nav {
+    background: cornflowerblue;
+    grid-area: n;
+}
+
+.item {
+    color: white;
+    list-style: none;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+
+.active {
+    color: black;
+    text-decoration: none;
+}

@@ -1,0 +1,12 @@
+.content {
+    background: yellowgreen;
+    grid-area: c;
+}
+
+.contentHeader img {
+    width: 100%;
+}
+
+.content .secondBlock {
+    display: flex;
+}

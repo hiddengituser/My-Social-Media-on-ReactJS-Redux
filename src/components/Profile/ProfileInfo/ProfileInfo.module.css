@@ -1,0 +1,12 @@
+
+.contentHeader img {
+    width: 100%;
+}
+
+.secondBlock {
+    display: flex;
+}
+
+.content .secondBlock img {
+    width: 200px;
+}
