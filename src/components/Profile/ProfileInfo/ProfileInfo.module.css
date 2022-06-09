@@ -8,10 +8,34 @@
     display: flex;
 }
 
-.content .secondBlock img {
-    width: 200px;
+.secondBlock img {
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .secondBlock {
     margin: 10px;
 }
+
+.description {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.description p {
+    color: white;
+}
+
+.description span {
+    color: black;
+    font-weight: 500;
+}
+
+.description a {
+    color: #05b488;
+    text-decoration: none;
+    font-weight: 700;
+}
+

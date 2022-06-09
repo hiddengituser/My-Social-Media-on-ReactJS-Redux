@@ -15,6 +15,7 @@
 
 .activeSpan span {
     cursor: pointer;
+    margin-right: 3px;
 }
 
 .everyDiv {
@@ -69,4 +70,9 @@
 .rightDiv {
     color: #05b488;
     margin-right: 15px;
+}
+
+.usersContainerOuterDiv {
+    display: flex;
+    justify-content: center;
 }

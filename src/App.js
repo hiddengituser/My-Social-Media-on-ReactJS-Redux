@@ -1,8 +1,8 @@
 import React from "react";
 import './App.css';
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import Nav from "./components/Nav/Nav";
-import Profile from "./components/Profile/Profile";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Routes, Route} from 'react-router-dom';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -10,11 +10,14 @@ import UsersContainer from "./components/Users/UsersContainer";
 const App = (props) => {
     return (
         <div className="wrapper">
-            <Header/>
+            <HeaderContainer/>
             <Nav dialogsData={props.store.getState().dialogsPage.dialogsData}/>
             <div className="wrapper-content">
                 <Routes>
-                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path='/profile' element={<ProfileContainer/>}/>
+                    <Route path="/profile/:userId" element={<ProfileContainer/>}/>
+
+
                     <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                     <Route path='/users' element={<UsersContainer/>}/>
                 </Routes>

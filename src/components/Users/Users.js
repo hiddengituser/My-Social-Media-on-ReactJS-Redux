@@ -1,74 +1,86 @@
 import React from "react";
 import styles from './Users.module.css'
+import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {toggleButtonDisabled} from "../../redux/users-reducer";
 
-class Users extends React.Component {
+let Users = (props) => {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-            });
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-    onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
-    }
+    let curP = props.currentPage;
+    let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
+    let curPL = curP + 5;
+    let slicedPages = pages.slice(curPF, curPL);
 
-    render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
+    return (<div className={styles.outerDiv}>
+        {
+            props.users.map(u => <div className={styles.everyDiv} key={u.id}>
+                <div className={styles.leftWrapper}>
+                    <div className={styles.leftDiv}>
+                        <div>
+                            <NavLink to={"/profile/" + u.id}>
+                                <img
+                                    src={u.photos.small !== null ? u.photos.small : 'https://cutt.ly/jHHtZLz'}
+                                    alt="avatar"
+                                    className={styles.userPhoto}/>
+                            </NavLink>
+                        </div>
+                        <div>
+                            {u.followed ?
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                        withCredentials: true,
+                                        headers: {"API-KEY": "6ea0edf3-8af8-4005-8a44-59778857b236"},
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.unfollow(u.id);
+                                            }
+                                            props.toggleFollowingProgress(false, u.id);
+                                        });
 
-        let curP = this.props.currentPage;
-        let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
-        let curPL = curP + 5;
-        let slicedPages = pages.slice(curPF, curPL);
+                                }}>Unfollow</button> :
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {"API-KEY": "6ea0edf3-8af8-4005-8a44-59778857b236"}
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.follow(u.id);
+                                            }
+                                            props.toggleFollowingProgress(false, u.id);
+                                        });
 
-        return <div className={styles.outerDiv}>
-            {
-                this.props.users.map(u => <div className={styles.everyDiv} key={u.id}>
-                    <div className={styles.leftWrapper}>
-                        <div className={styles.leftDiv}>
-                            <div>
-                                <img src={u.photos.small !== null ? u.photos.small : 'https://cutt.ly/jHHtZLz'} alt="avatar"
-                                     className={styles.userPhoto}/>
-                            </div>
-                            <div>
-                                {u.followed ? <button onClick={() => {
-                                    this.props.unfollow(u.id)
-                                }}>Unfollow</button> : <button onClick={() => {
-                                    this.props.follow(u.id)
                                 }}>Follow</button>}
-                            </div>
-                        </div>
-                        <div className={styles.centerDiv}>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
                         </div>
                     </div>
-                    <div className={styles.rightDiv}>
-                        <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
+                    <div className={styles.centerDiv}>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
                     </div>
-                </div>)
-            }
-            <div className={styles.activeSpan}>
-                {slicedPages.map(p => {
-                    return <span className={this.props.currentPage === p && styles.selectedPage} onClick={e => {
-                        this.onPageChanged(p)
-                    }}>{p}</span>
-                })}
-            </div>
+                </div>
+                <div className={styles.rightDiv}>
+                    <div>{'u.location.country'}</div>
+                    <div>{'u.location.city'}</div>
+                </div>
+            </div>)
+        }
+        <div className={styles.activeSpan}>
+            {slicedPages.map(p => {
+                return <span className={props.currentPage === p && styles.selectedPage} onClick={e => {
+                    props.onPageChanged(p)
+                }}>{p}</span>
+            })}
         </div>
-    }
+    </div>)
 }
 
 export default Users;
