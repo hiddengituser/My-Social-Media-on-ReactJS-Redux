@@ -39,3 +39,20 @@
     font-weight: 700;
 }
 
+.status {
+    margin-left: 10px;
+    color: black;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.statusSpan {
+    padding: 5px;
+    border: 1px solid black;
+    font-weight: 700;
+    background: whitesmoke;
+}
+
+.statusInput {
+    padding: 5px;
+}
